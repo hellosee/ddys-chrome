@@ -36,7 +36,7 @@ select:-moz-focusring {
     background-color: #f6f6f6;
     position: relative;
     z-index: 20;
-    padding: 6px 4px; }
+    padding: 6px 4px;height:38px; }
     .main-panel .main-content footer button {
       background-color: transparent;
       border-color: transparent;
