@@ -5,29 +5,53 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=500,user-scalable=no,initial-scale=1.0,maximum-scale=1.0">
 	<link href="css/styles.css?v=2" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="js/zepto.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
+	<style>
+		.spinner {
+			width: 40px;
+			height: 40px;
+			margin: 28px auto;
+			background-color: #333;
+			border-radius: 100%;
+			-webkit-animation: scaleout 1.0s infinite ease-in-out;
+			animation: scaleout 1.0s infinite ease-in-out;
+		}
+
+		@-webkit-keyframes scaleout {
+			0% { -webkit-transform: scale(0.0) }
+			100% {
+				-webkit-transform: scale(1.0);
+				opacity: 0;
+			}
+		}
+
+		@keyframes scaleout {
+			0% {
+				transform: scale(0.0);
+				-webkit-transform: scale(0.0);
+			} 100% {
+				  transform: scale(1.0);
+				  -webkit-transform: scale(1.0);
+				  opacity: 0;
+			  }
+		}
+	</style>
 </head>
 <body>
 	<div id="root" class="weh-shf">
 		<div class="main-panel  ">
 			<div class="main-content section-active" style="max-height: 600px;">
-				<img class="click back-active" src="img/icon-chevron-left-64.png" />
-				<div class="click back-margin"></div>
-				<main class="content-hits">
-					<div class="no-media">
-						<h1>没有在当前标签页检测到任何视频</h1>
-						<p>点击播放视频以帮助检测文件…</p>
-					</div>
-					<div class="main-content-mask"></div>
-				</main>
+				<main class="content-hits" id="main-content" data-url=""></main>
+				<!--
 				<footer>
 					<div class="buttons">
 						<div class="buttons-container">
-							<button title="关于">
+							<button title="关于" id="about">
 								<img src="img/icon-about-64.png">
 							</button>
-							<button title="网站支持">
+							<button title="网站支持" id="donate">
 								<img src="img/icon-sites-list-64.png">
 							</button>
 							<button title="分析页面">
@@ -38,8 +62,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="groups"></div>
-				</footer>
+				</footer>-->
 			</div>
 		</div>
 	</div>
