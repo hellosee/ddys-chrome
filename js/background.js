@@ -81,3 +81,9 @@ chrome.runtime.onInstalled.addListener(function(){
         ]);
     });
 });
+
+chrome.contextMenus.create({
+    title: "点点影视VIP视频解析",
+    onclick: function(){alert('您点击了右键菜单！');}
+});
+

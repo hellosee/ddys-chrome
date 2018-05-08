@@ -3,14 +3,62 @@ $(function() {
         window.open(chrome.extension.getURL('play.html'));
     });
     $('#donate').click(function(e){
-        window.open(chrome.extension.getURL('play.html'));
+        console.log('donate');
+        sendMessageToContentScript({cmd:'test', value:'你好，我是popup！'},function(response){
+            if(response){
+                alert(response);
+            }
+        })
     });
 
-    $('#playbtn').click(function(e){
-        window.open(chrome.extension.getURL('play.html'));
+    $('#main-content').click(function(e){
+
+        $.ajax({
+            url:"http://dw.local.com/vod/index",
+            type:'post',
+            async:true,
+            data:{'url':$(this).attr('data-url')},
+            dataType:'json',
+            beforeSend:function(){cLoadingDiv();},
+            success:function(data){
+                if(data.code == 1){
+                    var data = data.data;
+                    console.log(data.playUrl);
+                    // 保存数据
+                    chrome.storage.sync.set({playUrl: data.playUrl,title:data.title}, function() {
+                        window.open(chrome.extension.getURL('play.html'));
+                    });
+                }
+            },
+            complete: function(){
+                $(".spinner").css('display','none');
+            }
+        });
     });
 
 });
+
+function sendMessageToContentScript(message,callback){
+    console.log(message);
+    getCurrentTabId(function(tabId){
+        chrome.tabs.sendMessage(tabId,message,function(response){
+            if(callback){
+                callback(response);
+            }
+        });
+
+    });
+}
+// 获取当前选项卡ID
+function getCurrentTabId(callback)
+{
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+    {
+        if(callback) callback(tabs.length ? tabs[0].id: null);
+    });
+}
+
+
 var parse = {
     /**
      * Get the current URL.
@@ -55,33 +103,8 @@ var parse = {
 // user devices.
 document.addEventListener('DOMContentLoaded', function() {
     parse.getCurrentTabUrl(function(url,title){
-        console.log(url);
-        console.log(title);
+        $("#main-content").attr('data-url',url);
         cHasMediaDiv(url,title);
-        /*
-        $.ajax({
-            url:"http://dw.local.com/vod/index",
-            type:'post',
-            async:true,
-            data:{'url':url},
-            dataType:'json',
-            beforeSend:function(){cLoadingDiv();},
-            success:function(data){
-                if(data.code == 1){
-                    var data = data.data;
-                    cHasMediaDiv(data.playUrl,data.title);
-                }
-            },
-            complete: function(){
-            }
-        });
-
-
-        chrome.tabs.getSelected(null, function (tab) {　　// 先获取当前页面的tabID
-            chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
-                console.log(response);　　// 向content-script.js发送请求信息
-            });
-        });*/
     });
 });
 

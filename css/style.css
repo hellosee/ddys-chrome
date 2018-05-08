@@ -1,0 +1,266 @@
+/*--------------------
+commons
+--------------------*/
+html {
+	min-height: 100%;
+	background-color: #f5f5f5;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+	line-height: 1.6;
+}
+
+@media ( min-width : 1200px) {
+	.container {
+		width: 970px;
+	}
+}
+
+.row {
+	margin-right: -10px;
+	margin-left: -10px;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3,
+	.col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9,
+	.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3,
+	.col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9,
+	.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3,
+	.col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9,
+	.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3,
+	.col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+hr {
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+hr.dotted {
+	border-top-style: dotted;
+}
+
+.form-control, .btn, textarea, .open>.dropdown-menu {
+	border-radius: 2px;
+}
+
+label {
+	font-weight: 400;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
+.no-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.no-break-out {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-ms-word-break: break-all;
+	word-break: break-all;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+.margin-top-10 {
+	margin-top: 10px;
+}
+
+.margin-top-20 {
+	margin-top: 20px;
+}
+
+.margin-top-30 {
+	margin-top: 30px;
+}
+
+/*--------------------
+header
+--------------------*/
+.hp-logo img {
+	margin: 5px 20px 5px 0;
+}
+
+@media ( min-width : 768px) {
+	.hp-logo img {
+		margin-top: 12px;
+		margin-bottom: 12px;
+	}
+}
+
+.hp-header.dark {
+	border-bottom: 1px solid #eee;
+}
+
+.hp-navbar {
+	margin-left: 0 !important;
+	margin-bottom: 0;
+	white-space: nowrap;
+	overflow-x: auto;
+}
+
+.hp-navbar li {
+	height: 40px;
+	line-height: 40px;
+	margin-right: 10px;
+}
+
+.hp-navbar li>a {
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.hp-navbar li.active {
+	border-bottom: 2px solid #2DBE60;
+}
+
+.hp-navbar li.active a {
+	color: #333;
+}
+
+.hp-social {
+	padding: 0;
+	margin-bottom: 0;
+	line-height: 40px;
+	height: 40px;
+}
+
+.hp-social-fb {
+	color: #3A5999;
+}
+
+.hp-social-tw {
+	color: #3AA9DE;
+}
+
+.hp-social-gp {
+	color: #D14836;
+}
+
+.hp-social a {
+	padding: 4px 10px;
+	border-radius: 2px;
+}
+
+.hp-social a:hover {
+	background: rgb(31, 181, 84);
+	color: white;
+}
+
+/*--------------------
+body
+--------------------*/
+.hp-body {
+	min-height: 500px;
+}
+
+.player-section {
+	background: #f5f5f5;
+}
+
+.player-section .url-control {
+
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+.player-section .url-control button {
+	width: 80px;
+}
+
+.player-section #player-container {
+	position: relative;
+	width: 100%;
+	height: 423px;
+	margin: 30px auto;
+	background: black;
+}
+
+@media ( max-width : 767px) {
+	.player-section #player-container {
+		height: 300px;
+	}
+}
+
+.player-section #player-notes {
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: -20px;
+	font-size: 13px;
+	color: #666;
+}
+
+.player-section #player {
+	width: 100%;
+	height: 100%;
+}
+
+.player-section #player-tip {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	margin-top: -20px;
+	text-align: center;
+	color: #ccc;
+	visibility: hidden;
+}
+
+/* @media ( min-width : 768px) {
+	.faq-section {
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+} */
+
+/*--------------------
+footer
+--------------------*/
+.hp-footer {
+	background: #f5f5f5;
+	padding-top: 15px;
+	padding-bottom: 30px;
+	margin-top: 30px;
+	line-height: 2;
+	font-size: 13px;
+}
+
+@media ( min-width : 768px) {
+	.hp-footer ul {
+		float: right;
+	}
+}
+
+/*--------------------
+ezoic
+--------------------*/
+.mgid-container {
+	padding-top: 10px;
+	max-width: 600px;
+	max-height: 300px;
+	overflow: hidden;
+}
