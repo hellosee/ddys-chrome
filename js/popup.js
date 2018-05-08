@@ -1,3 +1,4 @@
+var oPlayUrl = "";
 $(function() {
     $("#about").on("click",function(e){
         window.open(chrome.extension.getURL('play.html'));
@@ -12,9 +13,8 @@ $(function() {
     });
 
     $('#main-content').click(function(e){
-
         $.ajax({
-            url:"http://dw.local.com/vod/index",
+            url:"http://api.phpnote.com/vod/index",
             type:'post',
             async:true,
             data:{'url':$(this).attr('data-url')},
@@ -23,9 +23,8 @@ $(function() {
             success:function(data){
                 if(data.code == 1){
                     var data = data.data;
-                    console.log(data.playUrl);
                     // 保存数据
-                    chrome.storage.sync.set({playUrl: data.playUrl,title:data.title}, function() {
+                    chrome.storage.sync.set({playUrl: data.playUrl,title:data.title,oPlayUrl:oPlayUrl}, function() {
                         window.open(chrome.extension.getURL('play.html'));
                     });
                 }
@@ -39,7 +38,6 @@ $(function() {
 });
 
 function sendMessageToContentScript(message,callback){
-    console.log(message);
     getCurrentTabId(function(tabId){
         chrome.tabs.sendMessage(tabId,message,function(response){
             if(callback){
@@ -103,6 +101,7 @@ var parse = {
 // user devices.
 document.addEventListener('DOMContentLoaded', function() {
     parse.getCurrentTabUrl(function(url,title){
+        oPlayUrl = url;
         $("#main-content").attr('data-url',url);
         cHasMediaDiv(url,title);
     });
