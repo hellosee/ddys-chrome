@@ -1,4 +1,5 @@
 var oPlayUrl = "";
+var otitle = "";
 $(function() {
     $("#about").on("click",function(e){
         window.open(chrome.extension.getURL('play.html'));
@@ -13,25 +14,10 @@ $(function() {
     });
 
     $('#main-content').click(function(e){
-        $.ajax({
-            url:"http://api.phpnote.com/vod/index",
-            type:'post',
-            async:true,
-            data:{'url':$(this).attr('data-url')},
-            dataType:'json',
-            beforeSend:function(){cLoadingDiv();},
-            success:function(data){
-                if(data.code == 1){
-                    var data = data.data;
-                    // 保存数据
-                    chrome.storage.sync.set({playUrl: data.playUrl,title:data.title,oPlayUrl:oPlayUrl}, function() {
-                        window.open(chrome.extension.getURL('play.html'));
-                    });
-                }
-            },
-            complete: function(){
-                $(".spinner").css('display','none');
-            }
+
+        var op = $(this).attr('data-url');
+        chrome.storage.sync.set({playUrl: "",title:otitle,oPlayUrl:op}, function() {
+            window.open(chrome.extension.getURL('play.html'));
         });
     });
 
@@ -44,7 +30,6 @@ function sendMessageToContentScript(message,callback){
                 callback(response);
             }
         });
-
     });
 }
 // 获取当前选项卡ID
@@ -102,6 +87,7 @@ var parse = {
 document.addEventListener('DOMContentLoaded', function() {
     parse.getCurrentTabUrl(function(url,title){
         oPlayUrl = url;
+        otitle = title;
         $("#main-content").attr('data-url',url);
         cHasMediaDiv(url,title);
     });
