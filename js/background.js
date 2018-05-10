@@ -82,6 +82,25 @@ chrome.runtime.onInstalled.addListener(function(){
     });
 });
 
+// 监听来自content-script的消息
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
+{
+
+    if(request.cmd == 'get_current_url') {
+        //sendResponse('我是后台，我已收到你的消息：' + window.location.href);
+        getCurrentTabUrl(function(url){
+            //sendResponse('您要的当前url：' + url);
+        });
+    } else {
+
+    }
+
+    //console.log('收到来自content-script的消息：');
+   // console.log(request, sender, sendResponse);
+   // sendResponse('我是后台，我已收到你的消息：' + JSON.stringify(request));
+});
+
+
 chrome.contextMenus.create({
     title: "点点影视VIP视频解析",
     onclick: function(){
@@ -92,29 +111,7 @@ chrome.contextMenus.create({
         })
     }
 });
-function getCurrentTabUrl(callback){
-    var queryInfo = {
-        active:true,
-        currentWindow:true
-    };
-    chrome.tabs.query(queryInfo,function(tabs){
-        // chrome.tabs.query invokes the callback with a list of tabs that match the
-        // query. When the popup is opened, there is certainly a window and at least
-        // one tab, so we can safely assume that |tabs| is a non-empty array.
-        // A window can only have one active tab at a time, so the array consists of
-        // exactly one tab.
-        var tab = tabs[0];
-        // A tab is a plain object that provides information about the tab.
-        // See https://developer.chrome.com/extensions/tabs#type-Tab
-        var url = tab.url;
-        // tab.url is only available if the "activeTab" permission is declared.
-        // If you want to see the URL of other tabs (e.g. after removing active:true
-        // from |queryInfo|), then the "tabs" permission is required to see their
-        // "url" properties.
-        console.assert(typeof url == 'string', 'tab.url should be a string');
-        callback(url,tab.title);
-    });
-}
+
 
 function getPlayUrl(type){
 
@@ -132,23 +129,6 @@ function getPlayUrl(type){
 
         }
     });
-    alert(url);
-    /*
-    var url = new Array();
-    url[0] = 'http://yun.baiyug.cn/vip/?url=';
-    url[1] = 'http://jx.aeidu.cn/index406.php?url=';
-    url[2] = 'http://88wx.pw/vip/playe.php?url=';
-    url[3] = 'http://jiexi.92fz.cn/player/vip.php?url=';
-    url[4] = 'http://wwwhe73.177kdy.cn/1.php?url=';
-    url[5] = 'http://jqaaa.com/jq3/?url=';
-    url[6] = 'http://aikan-tv.com/?url=';
-    url[7] = 'http://www.wpswan.com/mzr/vipparse/index.php?url=';
-    url[8] = 'http://player.jidiaose.com/supapi/iframe.php?v=';
-    url[9] = 'https://api.flvsp.com/?url=';
-    url[10] = 'http://api.bbbbbb.me/svip/v.php?url=';
-    url[11] = 'http://000o.cc/jx/ty.php?url==';
-    return url[type];
-    */
 }
 
 

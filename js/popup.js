@@ -50,6 +50,7 @@ var parse = {
      *   is found.
      */
     "getCurrentTabUrl" :function(callback){
+        console.log(chrome);
         // Query filter to be passed to chrome.tabs.query - see
         // https://developer.chrome.com/extensions/tabs#method-query
         var queryInfo = {
